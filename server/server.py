@@ -23,7 +23,7 @@ class Server:
     def __init__(self):
 
         #settings
-        self.port = 10000
+        self.port = 3389
         self.host = ''
         self.server_addr = (self.host, self.port)
 
@@ -144,7 +144,8 @@ class Server:
 
     def _create_socket(self):
         """creates a tCP socket with ipv4 as addr family"""
-        self.sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print("SERVER INITIATED")
     
     def _bind_socket_to_addr(self):
         """associate the socket to server addr to use it as server"""

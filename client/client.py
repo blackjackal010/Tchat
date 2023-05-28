@@ -10,7 +10,7 @@ class Client:
     def __init__(self):
 
         #serv addr
-        self.port = 10000
+        self.port = 3389
 
         self.sock = None
 
@@ -148,7 +148,7 @@ class Client:
             print(data)
 
     def _create_client_socket(self):
-        self.sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def _client_connect_server(self):
         while True:
