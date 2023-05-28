@@ -10,9 +10,7 @@ class Client:
     def __init__(self):
 
         #serv addr
-        self.host = 'localhost'
         self.port = 10000
-        self.server_addr = (self.host, self.port)
 
         self.sock = None
 
@@ -47,7 +45,7 @@ class Client:
         print(" "*10+"|  |*|   | CHAT ...   |")
         print(" "*10+"+---------------------+\n")    
         if self.client_name:
-            print(f" Current User : {self.client_name}")
+            print(f" Your UserName : {self.client_name}")
         print("\n")
     
     def show_startup(self):
@@ -150,10 +148,20 @@ class Client:
             print(data)
 
     def _create_client_socket(self):
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 
     def _client_connect_server(self):
-        self.sock.connect(self.server_addr)
+        while True:
+            self.host = input('Enter server ip: ').strip()
+            self.server_addr = (self.host, self.port)
+            try:
+                self.sock.connect(self.server_addr)
+            except:
+                print('Invalid ip entered. Enter Valid Ip')
+            else:
+                print("Connected to server\nLanching Tchat")
+                time.sleep(2)
+                break
 
 c = Client()
 c.client_run()

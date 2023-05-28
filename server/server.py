@@ -24,7 +24,7 @@ class Server:
 
         #settings
         self.port = 10000
-        self.host = 'localhost'
+        self.host = ''
         self.server_addr = (self.host, self.port)
 
         #socket
@@ -92,12 +92,13 @@ class Server:
             if req_code == 5001:
                 in_connection = False
                 self.thread_count -= 1
+                print("client connected:", self.thread_count)
         
     
     def _send_data_to_all_room_members(self,room_number, cli_name, data):
         """send msg to all members of the room"""
         for member in self.rooms[room_number]:
-            m_data = f"->From {cli_name}: {data}"
+            m_data = f"{cli_name.title()}: {data}"
             if member == cli_name:
                 continue
                 #m_data = f" You : {data}"
@@ -143,7 +144,7 @@ class Server:
 
     def _create_socket(self):
         """creates a tCP socket with ipv4 as addr family"""
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
     
     def _bind_socket_to_addr(self):
         """associate the socket to server addr to use it as server"""
